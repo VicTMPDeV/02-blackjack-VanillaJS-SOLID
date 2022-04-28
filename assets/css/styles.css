@@ -1,0 +1,28 @@
+html, body {
+    margin: 0px;
+    background-color: #2F4F30;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.my-title {
+    color: white;
+    background-color: black;
+    padding: 20px;
+}
+
+.players {
+    text-align: center;
+}
+
+.deck-card {
+    width: 140px;
+    position: relative;
+    left: 40px;
+    margin-left: -50px;
+}
+
+#player-cards, #computer-cards {
+    padding: 1.5rem;
+}
