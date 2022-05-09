@@ -23,7 +23,7 @@ que no pueda ser referenciado (no tenga un nombre que establezca la ubicación
 en memoria) el prototipo desde consola y autoinvocada para que se lance nada
 más comenzar
 */
-(() => {
+const blackJackModule = (() => {
     'use strict'
     //Global Variables
     let deck = [];
@@ -34,7 +34,7 @@ más comenzar
           AceValue = 11,
           jqkValue = 10;
 
-    let scores = [];
+    let playersAndComputerScores = [];
 
     //DOM Ref Variables
     const btnHit     = document.querySelector('#btnHitCard'),
@@ -45,12 +45,12 @@ más comenzar
           scoreTag = document.querySelectorAll('small');
 
     // Initializer
-    const initGame = ( numPlayers = 2 ) => {
+    const initGame = ( numPlayers = 2 ) => { //Por defecto 2 jugadores (no existe implementación para más)
         deck = createDeck();
-        scores = [];
+        playersAndComputerScores = [];
 
         for (let i=0; i<numPlayers; i++) {
-            scores.push(0);          
+            playersAndComputerScores.push(0);          
         }
 
         scoreTag.forEach( elem => elem.innerText = 0 );
@@ -91,14 +91,14 @@ más comenzar
 
     //Turn: 0 = Player - last = Computer
     const scoring = ( card, turn ) => {
-        scores[turn] = scores[turn] + cardValue(card);
-        scoreTag[turn].innerHTML = scores[turn];
-        return scores[turn];
+        playersAndComputerScores[turn] = playersAndComputerScores[turn] + cardValue(card);
+        scoreTag[turn].innerHTML = playersAndComputerScores[turn];
+        return playersAndComputerScores[turn];
     }
 
     const theWinnerIs = () => {
-
-        const [playerScore,computerScore] = scores;
+        //Desestructuro el Array inicial de los scores
+        const [playerScore,computerScore] = playersAndComputerScores;
 
         setTimeout(() => {
             if (computerScore === playerScore) {
@@ -129,8 +129,8 @@ más comenzar
         let computerScore = 0;
         while ((computerScore < minScoreToWin) && (minScoreToWin <= 21)) {
             const hittedCard = hitCard();
-            computerScore = scoring(hittedCard, scores.length - 1);
-            createCardImage( hittedCard , scores.length - 1);
+            computerScore = scoring(hittedCard, playersAndComputerScores.length - 1);
+            createCardImage( hittedCard , playersAndComputerScores.length - 1);
         }
         theWinnerIs();
 
@@ -167,9 +167,12 @@ más comenzar
         btnHit.disabled = true;
         btnStand.disabled = true;
         //Juega la máquina
-        ComputerPlay(scores[0]);
+        ComputerPlay(playersAndComputerScores[0]);
     });
 
-    
+    // Lo que retorna el Módulo es público y visible fuera de la función, el resto es privado (closure)
+    return {
+         newGame: initGame
+    };
 
 })();
