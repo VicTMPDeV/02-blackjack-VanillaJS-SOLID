@@ -17,25 +17,23 @@
         <div id="divButtons" class="col-12 mt-4 mb-4">
             <button id="btnNewGame" class="btn btn-danger ml-2 mr-2">
                 <div class="col-12"><b>Nuevo Juego</b></div></button>
-            <button id="btnHitCard" class="btn btn-primary ml-2 mr-2">
+            <button id="btnHitCard" disabled="disabled" class="btn btn-primary ml-2 mr-2">
                 <div class="col-12"><b>Pedir Carta</b></div></button>
             </button>
-            <button id="btnStand" class="btn btn-warning ml-2 mr-2">
+            <button id="btnStand" disabled="disabled" class="btn btn-warning ml-2 mr-2">
                 <div class="col-12"><b>Plantarse</b></div>
             </button>
         </div>
     </div>
     <div class="row container-fluid">
         <div class="players col-12">
-            <h3>Jugador 1 - Puntuación: <small id="playerScoreTag">0</small></h3>
-            <div id="player-cards">
-                <!-- <img class="deck-card" src="assets/cards/2C.png"> -->
+            <h3>Jugador 1 - Puntuación: <small>0</small></h3>
+            <div id="player-cards" class="divCards">
             </div>
         </div>
         <div class="players col-12">
-            <h3>Computadora - Puntuación: <small id="computerScoreTag">0</small></h3>
-            <div id="computer-cards">
-                <!-- <img class="deck-card" src="assets/cards/3C.png"> -->
+            <h3>Computadora - Puntuación: <small>0</small></h3>
+            <div id="computer-cards" class="divCards">
             </div>
         </div>
     </div>
