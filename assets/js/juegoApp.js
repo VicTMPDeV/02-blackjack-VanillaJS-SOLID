@@ -24,7 +24,7 @@ en memoria) el prototipo desde consola y autoinvocada para que se lance nada
 más comenzar
 */
 const blackJackModule = (() => {
-    'use strict'
+    'use strict';
     //Global Variables
     let deck = [];
     const types = ['C', 'D', 'H', 'S'],
