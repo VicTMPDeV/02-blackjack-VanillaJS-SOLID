@@ -23,7 +23,8 @@ que no pueda ser referenciado (no tenga un nombre que establezca la ubicación
 en memoria) el prototipo desde consola y autoinvocada para que se lance nada
 más comenzar
 */
-const blackJackModule = (() => {
+
+(() => {
     'use strict';
     //Global Variables
     let deck = [];
@@ -170,7 +171,7 @@ const blackJackModule = (() => {
         ComputerPlay(playersAndComputerScores[0]);
     });
 
-    // Lo que retorna el Módulo es público y visible fuera de la función, el resto es privado (closure)
+    // Lo que retorna el Módulo es público y visible fuera de la función, el resto es privado (closure). Además al poner return ya la función no devuelve undefined
     return {
          newGame: initGame
     };
