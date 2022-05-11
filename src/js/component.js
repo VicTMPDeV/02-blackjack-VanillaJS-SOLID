@@ -23,6 +23,8 @@ que no pueda ser referenciado (no tenga un nombre que establezca la ubicación
 en memoria) el prototipo desde consola y autoinvocada para que se lance nada
 más comenzar
 */
+import '../styles.css'; //webpack config
+
 export const blackjackModule = () => {
     'use strict';
     //Global Variables
