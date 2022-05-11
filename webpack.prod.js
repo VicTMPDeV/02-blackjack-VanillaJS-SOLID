@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 //Todo esto se compilará en el Build , añadiendo el contenido necesario dentro del directorio dist (html, css...)
 module.exports = {
 
-    mode: "development",
+    mode: "production",
 
     output: {
         clean: true
