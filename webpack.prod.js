@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const CssMinimizer = require('css-minimizer-webpack-plugin');
+const Terser = require('terser-webpack-plugin');
 
 //Todo esto se compilará en el Build , añadiendo el contenido necesario dentro del directorio dist (html, css...)
 module.exports = {
@@ -8,7 +10,8 @@ module.exports = {
     mode: "production",
 
     output: {
-        clean: true
+        clean: true,
+        filename: 'main.[contenthash].js'
     },
 
     module: {
@@ -32,11 +35,27 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: 'file-loader'
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             }
         ]
     },
 
-    optimization: {},
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizer(),
+            new Terser()
+        ]
+    },
 
     plugins: [
         new HtmlWebpackPlugin({
@@ -45,7 +64,7 @@ module.exports = {
             template: './src/index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: 'styles.css', //Es el nombre que quiero que le ponga - fullhash va a ayudar a que no se mantenga en caché el archivo tras cada despliegue - SOLO EN ENTORNO DESPLIEGUE, EN DESARROLLO NO ES NECESARIO
+            filename: '[name].[fullhash].css', //Es el nombre que quiero que le ponga - fullhash va a ayudar a que no se mantenga en caché el archivo tras cada despliegue - SOLO EN ENTORNO DESPLIEGUE, EN DESARROLLO NO ES NECESARIO
             ignoreOrder: false
         }),
         new CopyPlugin({
